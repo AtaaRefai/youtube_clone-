@@ -1,0 +1,41 @@
+@import http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css;
+
+
+.tbp-hrt-container {
+    width: auto;
+    margin: 0;
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+}
+
+.tbp-hrt {
+    position: relative;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-size: 13px!important;
+}
+
+.tbp-hrt.finish:before {
+    color: #e65a47;
+    content: "\f004";
+    font-weight: 400!important;
+    font-family: fontawesome;
+}
+
+.tbp-hrt.finish:after {
+    color: #000;
+    font-weight: 400!important;
+}
+.tbp-hrt:after {
+    content: attr(data-amount) "";
+    font: normal normal 11px Martel Sans, sans-serif;
+    color: #000000;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 0 10px;
+}
