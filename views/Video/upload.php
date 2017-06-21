@@ -1,10 +1,15 @@
 	<div class="content">
-			<div class="section group" id='group'>				
-						
+	<?php if($this->session->flashdata('message')){ ?> 
+            <div id='error'>
+            <strong>Error!</strong> <?php echo $this->session->flashdata('message') ; ?>
+            <img id="close" src='/public/images/cross.png'>
+            </div>
+            <?php }?>
+			<div class="section group" id='group'>					
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
 				  	<h3>Upload New Video :</h3>
-                <form enctype="multipart/form-data" action="http://localhost/videotube/index.php/Video_Controller/upload" method="POST">
+                <form enctype="multipart/form-data" action="http://localhost/videotube/index.php/Video_Controller/upload_video" method="POST">
 					        <div>
 						    	<span><label>Title :</label></span>
 						    	<span><input type="text" name='title' required></span>
@@ -28,3 +33,10 @@
   				</div>				
 			  </div>
 		</div>
+		<script>
+		$(document).ready(function(){
+        $('#error').click(function(){
+        $('#error').hide();
+        });
+    });
+		</script>

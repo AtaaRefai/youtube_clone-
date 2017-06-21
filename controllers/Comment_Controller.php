@@ -1,23 +1,13 @@
 <?php
-/* content: comment controller class
+/**content: comment controller class
    @author: Ata Refai
-   This class contains all related functions of comment table*/
+   This class contains all related functions of comment table**/
 
 class Comment_Controller extends CI_Controller{
-	public function __construct(){
-		parent::__construct();
-		$this->load->model('User_Model');
-		$this->load->model('Comment_Model');
-		$this->load->model('Like_Model');
-		$this->load->model('Video_Model');
-		$this->load->helper('url_helper');
-		$this->load->library('form_validation');
-		$this->load->library('session');
-	}
 
-    /* add comment to a video by user
+    /**add comment to a video by user
     @param none
-    @return void*/
+    @return void**/
 	public function add_comment(){
 		$vname = $this->input->post('vname');
 		$vid = $this->input->post('vid');
@@ -42,25 +32,26 @@ class Comment_Controller extends CI_Controller{
 			'dislikes' => $this->Like_Model->get_dislikes($vid) ,
 			'status' => $this->Like_Model->get_status($vid, $uid) ,
 			'vname' => $vname,
-			'vid' => $vid
+			'vid' => $vid,
+			
 		);
-    	$this->load->view('template/header', $hdata);
-		$this->load->view('User/single', $sdata);
-		$this->load->view('template/footer', $sdata);
+        $this->session->set_flashdata('message', 'Comment was added successfully');
+    	redirect("http://localhost/videotube/index.php/User_controller/display/".$sdata['vname']."/".$sdata['vid'],"refresh");
 	}
 
-    /*delete comment by author
-    @param int $cid detects which comment to be deleted,
-    @param int $uid detects comment deleted by which user
-    @return void*/
-	public function delete_comment($cid, $uid){
+    /**delete comment by author
+    @param none
+    @return bool**/
+	public function delete_comment(){
+
+        $vid= $this->input->post('vid');
+        $vname= $this->input->post('vname');
+        $cid=$this->input->post('cid');
 		$user = $this->session->userdata('id');
-		if ($user == $uid)
-			{
-			$this->Comment_Model->delete_comment($cid, $uid);
-			echo true;
-			}
-		  else echo false;
+		$this->Comment_Model->delete_comment($cid, $user);
+		$this->session->set_flashdata('message', 'Comment was deleted successfully');
+    	redirect("http://localhost/videotube/index.php/User_controller/display/".$vname."/".$vid,"refresh");
+		
 	}
 
 } //class

@@ -71,11 +71,11 @@
                 	
                 	jQuery.parseJSON(JSON.stringify(data));
                 	console.log(data);
-                	if(data==true)
+                	if(data!=false)
                 	$( "#"+cid ).remove();
                    else {
                    	$("#msg").fadeIn();
-                   $("#msg").delay( 1000 ).fadeOut('slow');}
+                    $("#msg").delay( 2000 ).fadeOut('slow');}
 
                 }});
 
@@ -91,11 +91,17 @@
                 type: 'post',
                 success:function(data){
                 	 $( "#"+vid ).remove();
+                     
                 }});
 
     });
 
+$(document).ready(function(){
+    $('#flash2').click(function(){
+     $('#flash2').hide();
+    });
 
+});
 
 </script>
 	</body>

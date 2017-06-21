@@ -1,7 +1,7 @@
 <?php
-/* content:Like table model
+/** content:Like table model
    @author: Ata Refai
-   This class contains all related database queries of Like table*/
+   This class contains all related database queries of Like table**/
 class Like_Model extends CI_Model{
 
 	
@@ -9,11 +9,11 @@ class Like_Model extends CI_Model{
 		$this->load->database();
 	}
 
-    /* add like by user to a video
+    /** add like by user to a video
     @param int $value detect the type of reaction to be added (like or dislike)
     @param int $vid detects the id of the video to add reaction to
     @param int $uid detects the id of the user who reacted to the video
-    @return void */
+    @return void **/
 	public function add_likes($value, $vid, $uid){
 		$data = array(
 			'type' => $value,
@@ -38,26 +38,26 @@ class Like_Model extends CI_Model{
 		}
 	}
 
-    /* count likes of a video
+    /** count likes of a video
     @param int $vid detects the id of the video to get it's likes number 
-    @return int */
+    @return int **/
 	public function get_likes($vid){
 		$this->db->where('type', 1, 'vid', $vid);
 		return $this->db->count_all_results('likes');
 	}
 
-    /*count dislikes of a video
+    /**count dislikes of a video
     @param int $vid detects the id of the video to get it's dislikes number 
-    @return int */
+    @return int **/
 	public function get_dislikes($vid){
 		$this->db->where('type', -1, 'vid', $vid);
 		return $this->db->count_all_results('likes');
 	}
 
-    /*get the reaction(like/dislike) of a user to a video
+    /**get the reaction(like/dislike) of a user to a video
     @param int $vid detects the id of the video 
     @param int $uid detects the id of the user who reacted
-    @return int */
+    @return int **/
 	public function get_status($vid, $uid){
 		$this->db->select('type');
 		$this->db->from('likes');

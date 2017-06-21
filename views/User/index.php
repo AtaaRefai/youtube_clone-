@@ -8,6 +8,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clear"> </div>
 		<div class="content" id='con'>
 			<div class="left-content">
+
+			<?php if($this->session->flashdata('message')){ ?> 
+            <div id='flash2'>
+            <strong>Success!</strong> <?php echo $this->session->flashdata('message') ; ?>
+            <img id="close" src='/public/images/cross.png'>
+            </div>
+            <?php }?>
+
 				<div class="searchbar">
 					<div class="search-left">
 						<p>Your uploads on  VideosTube</p>
@@ -21,19 +29,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				        <?php foreach($view_data as $data) {?> 
                         <div class="grid" id="<?php echo $data['vid']; ?>" >
 						<h3><?php echo $data['title']; ?></h3>
-						<a href="display"><img src='/public/images/<?php echo " ".$data['img'].".jpg";?>' title="video-name" /></a>
+						<a href="http://localhost/videotube/index.php/User_Controller/display/<?php echo $data['video']; ?>/<?php echo $data['vid']; ?>"><img src='/public/images/<?php echo $data['img'];?>' title="video-name" /></a>
 						<div class="time">
 							<span>00:10</span>
 						</div>
 						<div class="grid-info">
 							<div class="video-share">
-								<ul>
-									<li><a class='crossv' id="<?php echo $data['vid']; ?>" name='<?php echo $data['uid']; ?>'><img src="/public/images/cross.png" title="Delete this video" /></a></li>
-									
-								</ul>
+								
+								<form action='http://localhost/videotube/index.php/Video_Controller/delete_video' 
+								method='post'>
+								    <input name='vid' value='<?php echo $data['vid']; ?>' hidden/>
+									<button class='crossv'><img src="/public/images/cross.png" title="Delete this video" /></button>
+								</form>
+							
 							</div>
 							<div class="video-watch">
-								<a href="http://localhost/videotube/index.php/User_Controller/display/<?php echo " ".$data['video']; ?>/<?php echo $data['vid']; ?>">Watch Now</a>
+								<a href="http://localhost/videotube/index.php/User_Controller/display/<?php echo $data['video']; ?>/<?php echo $data['vid']; ?>">Watch Now</a>
 							</div>
 							<div class="clear"> </div>
 							<div class="lables">
@@ -110,11 +121,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 url:'http://localhost/videotube/index.php/Video_Controller/delete_video/'+vid+'/'+uid ,
                 type: 'post',
                 success:function(data){
-                	$( "#"+vid ).remove();
+                	window.location.href = "http://localhost/videotube/index.php/User_Controller/home";
+                
                 }});
 
     });
 
+$(document).ready(function(){
+    $('#flash2').click(function(){
+     $('#flash2').hide();
+    });
+
+});
 
 
 </script>	

@@ -24,7 +24,7 @@
 			<div class="top-nav">
 				<ul>
 				    <li id="name"><a href="home.php" id='aname'><?php echo $first.' '.$last ?></a></li>
-					<li><a href="/videotube/index.php/User_Controller/index">Home</a></li>
+					<li><a href="/videotube/index.php/User_Controller/home">Home</a></li>
 					<li><a href="/videotube/index.php/Video_Controller/upload">Upload</a></li>
 					<li><a href="/videotube/index.php/User_Controller/logout">Logout</a></li>
 				</ul>

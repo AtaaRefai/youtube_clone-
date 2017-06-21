@@ -1,10 +1,16 @@
-<div id='msg'>
-    <strong>Error!</strong> Can not delete other users comments!</div>
+
 <div class="content">
+<div class="content">
+<?php if($this->session->flashdata('message')){ ?> 
+      <div id='flash2'>
+      <strong>Success!</strong> <?php echo $this->session->flashdata('message') ; ?>
+      <img id="close" src='/public/images/cross.png'>
+      </div>
+<?php }?>
 	<div class="section group" >				
 		<div class="col span_2_of_3">
 		    <video  id='<?php echo $vid ;?>' class='video' controls>
-                 <source src='/public/images/<?php echo $vname.".mp4";?>' type="video/ogg">
+                 <source src='/public/images/<?php echo $vname;?>' type="video/ogg">
             </video>
         <div id="rating">
            <button class="like"><img src='/public/images/like.jpg' title="video-name" /> <span class="likes"><?php
@@ -33,7 +39,13 @@
                             <div class="media-body">
                                 
                     <h4 class="media-heading user_name" style="margin-top: 10px;"><?php echo $comment['first']." ".$comment['last'] ; ?>
-    <a class='cross' id='<?php echo $comment['cid'] ?>' name='<?php echo $comment['uid'] ?>'><img src='/public/images/cross.png'/></a>
+                    <form  action="http:\\localhost\videotube\index.php\Comment_Controller\delete_comment" method="post">
+                        <input name='vid' value='<?php echo $vid; ?>' hidden/>
+                        <input name='vname' value='<?php echo $vname; ?>' hidden/>
+                        <input name='cid' value='<?php echo $comment["cid"]; ?>' hidden/>
+                        <button class='cross'><img src='/public/images/cross.png'/></button>
+                    </form>
+             
                     </h4>
                              <?php echo $comment['comment'] ;?>
                     <hr>
@@ -46,7 +58,7 @@
                    <input type='text' name='comment' id='comment' placeholder="add a comment">
                    <input type='text' name='vid'  value='<?php echo $vid; ?>' hidden>
                    <input type='text' name='vname'  value='<?php echo $vname; ?>' hidden>
-                   <input  type='submit' name='add' id='addc' value='add'>
+                   <input type='submit' name='add' id='addc' value='add'>
                    </form>
                 </div>
             </div>

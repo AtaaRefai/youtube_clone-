@@ -1,7 +1,7 @@
  <?php
- /* content:user table model
+ /** content:user table model
    @author: Ata Refai
-   This class contains all related database queries of User table*/
+   This class contains all related database queries of User table**/
 class User_Model extends CI_Model {
 
  
@@ -10,9 +10,9 @@ class User_Model extends CI_Model {
     $this->load->database();
   }
 
-    /* register new users 
+    /** register new users 
     @param array() $data detect the data of user table record to be inserted
-    @return bool */
+    @return bool **/
   public function add_user($data = array()){
     
     $insert = $this->db->insert('user', $data);
@@ -24,9 +24,9 @@ class User_Model extends CI_Model {
     }
   }
 
-  /* cheack if user exist for login; 
+  /** cheack if user exist for login; 
     @param array() $data detect the data of user table record to be cheacked
-    @return array() */
+    @return array() **/
   public function login($data = array()){
     
     $this->db->select('*');
